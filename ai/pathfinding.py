@@ -44,6 +44,13 @@ def rebuild_path(node_arrived_from, end):
     path.reverse()
     return path
                    
-
+def find_waypoints(grid):
+    found = []
+    for row, line in enumerate(grid):
+        for col, char in enumerate(line):
+            if char.isdigit():
+                found.append((int(char), (row, col)))
+    found.sort()
+    return [pos for _, pos in found]
 
   
