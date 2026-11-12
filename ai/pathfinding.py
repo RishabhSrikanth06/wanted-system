@@ -53,4 +53,15 @@ def find_waypoints(grid):
     found.sort()
     return [pos for _, pos in found]
 
-  
+def reachable_within(grid, start, max_steps):
+    distance = {start: 0}
+    queue = deque([start])
+    while queue:
+        current = queue.popleft()
+        if distance[current] == max_steps:
+            continue                      # on the edge: don't spread further
+        for n in valid_neighbours(grid, current):
+            if n not in distance:
+                distance[n] = distance[current] + 1
+                queue.append(n)
+    return distance
